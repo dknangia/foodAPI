@@ -14,11 +14,19 @@ namespace Food
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+           
+
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+              name: "Foods",
+              routeTemplate: "api/foods/{foodId}",
+              defaults: new { controller = "Foods", foodId = RouteParameter.Optional }
+          );
+
+            config.Routes.MapHttpRoute(
+               name: "DefaultApi",
+               routeTemplate: "api/{controller}/{id}",
+               defaults: new { id = RouteParameter.Optional }
+           );
         }
     }
 }

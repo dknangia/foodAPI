@@ -7,9 +7,10 @@ namespace Food.Models
 {
     public class FoodModel
     {
+        public string URL { get; set; }
         public int id { get; set; }
         public string Name { get; set; }
 
-        public string Price { get; set; }
+        public double Price { get; set; }
     }
 }
