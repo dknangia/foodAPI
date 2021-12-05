@@ -7,17 +7,21 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Routing;
+using System.Web.Http.Filters;
 
 namespace Food.Controllers
 {
+    
     public class FoodsController : ApiController
     {
-        private FoodRepository _foodRepository;
+        private IFoodRepository _foodRepository;
 
-        public FoodsController()
+        public FoodsController(IFoodRepository repo)
         {
-            _foodRepository = new FoodRepository();
+            _foodRepository = repo;
         }
+
+        [RequireHttps]
         [HttpGet]
         public HttpResponseMessage Get()
         {
