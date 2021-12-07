@@ -21,7 +21,7 @@ namespace Food.Controllers
             _foodRepository = repo;
         }
 
-        [RequireHttps]
+     
         [HttpGet]
         public HttpResponseMessage Get()
         {
@@ -31,7 +31,7 @@ namespace Food.Controllers
                 result = _foodRepository.GetFood();
                 foreach (var item in result)
                 {
-                    item.URL = (new UrlHelper(Request)).Link("Foods", new { foodId = item.id });
+                    item.URL = (new UrlHelper(Request)).Link("Foods", new { foodId = item.ID });
                 }
             }
             catch (Exception ex)
@@ -65,7 +65,7 @@ namespace Food.Controllers
             if (toSave != null)
             {
                 FoodModel model = _foodRepository.SaveFood(toSave);
-                model.URL = (new UrlHelper(Request)).Link("Foods", new { foodId = model.id });
+                model.URL = (new UrlHelper(Request)).Link("Foods", new { foodId = model.ID });
                 return Request.CreateResponse(HttpStatusCode.Created, model);
             }
             else
