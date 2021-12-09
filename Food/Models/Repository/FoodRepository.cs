@@ -33,15 +33,15 @@ namespace Food.Models.Repository
                  throw ex;
             }
 
-            return DB.foodList.Find(x => x.id == foodId);
+            return DB.foodList.Find(x => x.ID == foodId);
         }
 
         public FoodModel SaveFood(FoodModel toSave)
         {
             int newId = DB.foodList.Count  +1 ;
-            toSave.id = newId; 
+            toSave.ID = newId; 
             DB.foodList.Add(toSave);
-            return DB.foodList.Find(x => x.id == newId);
+            return DB.foodList.Find(x => x.ID == newId);
 
         }
 
