@@ -13,30 +13,23 @@ namespace Food.Models.Repository
         {
             _db = new DB();
         }
-        public IEnumerable<FoodModel> GetFood()
+        public IList<FoodModel> GetFood()
         {
             return DB.foodList;
         }
 
         public FoodModel GetFood(int foodId)
         {
-            try
+            if(foodId < 0)
             {
-                if(foodId < 0)
-                {
-                    throw new Exception("Passed foodId cannot be less than 0"); 
-                }
-            }
-            catch (Exception ex)
-            {
-
-                 throw ex;
+                throw new Exception("Passed foodId cannot be less than 0"); 
             }
 
             return DB.foodList.Find(x => x.ID == foodId);
         }
 
-        public FoodModel SaveFood(FoodModel toSave)
+        
+        public virtual FoodModel SaveFood(FoodModel toSave)
         {
             int newId = DB.foodList.Count  +1 ;
             toSave.ID = newId; 
