@@ -14,7 +14,7 @@ namespace Food.Controllers
     
     public class FoodsController : ApiController
     {
-        private IFoodRepository _foodRepository;
+        private readonly IFoodRepository _foodRepository;
 
         public FoodsController(IFoodRepository repo)
         {
@@ -25,20 +25,21 @@ namespace Food.Controllers
         [HttpGet]
         public HttpResponseMessage Get()
         {
-            IEnumerable<FoodModel> result = null;
+            IList<FoodModel> result = null;
             try
             {
                 result = _foodRepository.GetFood();
-                foreach (var item in result)
-                {
-                    item.URL = (new UrlHelper(Request)).Link("Foods", new { foodId = item.ID });
-                }
+                if (result != null)
+                    foreach (var item in result)
+                    {
+                        item.URL = (new UrlHelper(Request)).Link("Foods", new {foodId = item.ID});
+                    }
             }
             catch (Exception ex)
             {
                 Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
             }
-            return result == null || result.Count() == 0 ? Request.CreateResponse(HttpStatusCode.NotFound) : Request.CreateResponse(HttpStatusCode.OK, result);
+            return result == null || !result.Any() ? Request.CreateResponse(HttpStatusCode.NotFound) : Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
 
