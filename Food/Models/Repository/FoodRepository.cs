@@ -42,5 +42,23 @@ namespace Food.Models.Repository
         {
             throw new NotImplementedException();
         }
+
+        public int addPositiveUnmbers(int a, int b)
+        {
+            try
+            {
+                if ((a < 0 || b < 0))
+                {
+                    return -1;
+                }
+
+                return a + b;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            
+        }
     }
 }
