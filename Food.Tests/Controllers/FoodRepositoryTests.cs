@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using Food.Controllers;
 using Food.Models;
 using Food.Models.Repository;
+using Moq;
 using NUnit.Framework;
 
 namespace Food.Tests.Controllers
@@ -42,16 +44,31 @@ namespace Food.Tests.Controllers
         }
 
         [Test]
-        public void GetFood_WhenIsBiggerThanZero_ReturnFood()
+        public void GetFood_WhenIdBiggerThanZero_ReturnFood()
         {
-            //Arrange
-            var result = _foodRepository.GetFood(1);
+            ////Arrange
+            //var result = _foodRepository.GetFood(1);
+
+            ////Assert
+
+            //Assert.That(result, Is.InstanceOf<FoodModel>());
+
+
+            //Using moq
+
+            //Arrange 
+            FoodModel fm = new FoodModel();
+            var foodRepository = new Mock<IFoodRepository>();
+            foodRepository.Setup(fr => fr.GetFood(1)).Returns(fm);
+
+            //Act
 
             //Assert
-
-            Assert.That(result, Is.InstanceOf<FoodModel>());
+            Assert.That(foodRepository.Object.GetFood(1), Is.SameAs(fm));
 
         }
+
+
 
         [Test]
         public void GetFood_WhenIDisLessThanZero_ThrowsException()
