@@ -13,37 +13,6 @@ using NUnit.Framework;
 namespace Food.Tests.Controllers
 {
 
-    public class A
-    {
-        public void walk()
-        {
-            
-        }
-
-    }
-
-    public class B:A
-    {
-        public void Run()
-        {
-            
-        }
-    }
-
-    public class C : B
-    {
-        
-    }
-
-    public class D
-    {
-        public D()
-        {
-            C c = new C();
-            c.walk();
-        }
-    }
-
     [TestFixture]
     class FoodRepositoryTests
     {
@@ -57,24 +26,25 @@ namespace Food.Tests.Controllers
 
 
 
-        
+
 
         [Test]
-        //[Ignore("Just learning it!")]
+        [Ignore("Just learning it!")]
         public void addPositiveNumbers_PassNegative_ThrowERROR()
         {
 
             //Act
-            var result = this._foodRepository.addPositiveUnmbers(-1, -2);
+            var result = this._foodRepository.AddPositiveNumbers(-1, -2);
 
             //Assert
-            Assert.That(result, Is.EqualTo(typeof(System.Exception)));
+            Assert.That(()=>_foodRepository.AddPositiveNumbers(-1, -2), Throws.Exception);
 
         }
 
         [Test]
         public void GetFood_WhenIsBiggerThanZero_ReturnFood()
         {
+            //Arrange
             var result = _foodRepository.GetFood(1);
 
             //Assert
@@ -84,20 +54,57 @@ namespace Food.Tests.Controllers
         }
 
         [Test]
-            public void GetFood_WhenIDisLessThanZero_ThrowsException()
-            {
-              
-
-                Assert.That(()=> _foodRepository.GetFood(-1), Throws.Exception);
-            }
-
-            [Test]
-            public void GetFood_WhenIdIsBiggerThanZero_ReturnsFoodModel()
-            {
-                Assert.That(()=>_foodRepository.GetFood(1), Is.InstanceOf<FoodModel>());
-            }
-
-
-           
+        public void GetFood_WhenIDisLessThanZero_ThrowsException()
+        {
+            Assert.That(() => _foodRepository.GetFood(-1), Throws.Exception);
         }
+
+        [Test]
+        public void GetFood_WhenIdIsBiggerThanZero_ReturnsFoodModel()
+        {
+            Assert.That(() => _foodRepository.GetFood(1), Is.InstanceOf<FoodModel>());
+        }
+
+        [Test]
+        public void SaveFood_WhenArgumentIsNull_ThrowsNullArgumentException()
+        {
+            FoodModel foodModel = null;
+            Assert.That(() => _foodRepository.SaveFood(foodModel), Throws.ArgumentNullException);
+        }
+
+        [Test]
+        public void SaveFood_WhenPassedCorrectObject_SavedFoodModel()
+        {
+            FoodModel foodModel = new FoodModel() { Name = "Tacos", Price = 23.6d}; 
+            Assert.That(_foodRepository.SaveFood(foodModel), Is.InstanceOf<FoodModel>());
+        }
+
+
+        [Test]
+        public void GetOutput_WhenPassed3_Fizz()
+        {
+            Assert.That(_foodRepository.GetOutput(3), Is.EqualTo("Fizz"));
+        }
+
+        [Test]
+        public void GetOutput_WhenPassed5_Buzz()
+        {
+            Assert.That(_foodRepository.GetOutput(5), Is.EqualTo("Buzz"));
+        }
+
+        [Test]
+        public void GetOutput_WhenPassed15_FizzBuss()
+        {
+            Assert.That(_foodRepository.GetOutput(15), Is.EqualTo("FizzBuzz"));
+        }
+
+        [Test]
+        [TestCase(2)]
+        [TestCase(-1)]
+        public void GetOutput_WhenPassedNonFizzBuzzNumber_NumberToString(int number)
+        {
+            Assert.That(_foodRepository.GetOutput(number), Is.EqualTo(number.ToString()));
+        }
+
+    }
 }

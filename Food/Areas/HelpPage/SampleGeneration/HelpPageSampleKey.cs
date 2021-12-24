@@ -18,7 +18,7 @@ namespace Food.Areas.HelpPage
         {
             if (mediaType == null)
             {
-                throw new ArgumentNullException("mediaType");
+                throw new ArgumentNullException(paramName: "mediaType");
             }
 
             ActionName = String.Empty;
@@ -37,7 +37,7 @@ namespace Food.Areas.HelpPage
         {
             if (type == null)
             {
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(paramName: "type");
             }
 
             ParameterType = type;
@@ -58,15 +58,15 @@ namespace Food.Areas.HelpPage
             }
             if (controllerName == null)
             {
-                throw new ArgumentNullException("controllerName");
+                throw new ArgumentNullException(paramName: "controllerName");
             }
             if (actionName == null)
             {
-                throw new ArgumentNullException("actionName");
+                throw new ArgumentNullException(paramName: "actionName");
             }
             if (parameterNames == null)
             {
-                throw new ArgumentNullException("parameterNames");
+                throw new ArgumentNullException(paramName: "parameterNames");
             }
 
             ControllerName = controllerName;
@@ -88,7 +88,7 @@ namespace Food.Areas.HelpPage
         {
             if (mediaType == null)
             {
-                throw new ArgumentNullException("mediaType");
+                throw new ArgumentNullException(paramName: "mediaType");
             }
 
             MediaType = mediaType;

@@ -29,7 +29,7 @@ namespace Food.Areas.HelpPage
         {
             if (documentPath == null)
             {
-                throw new ArgumentNullException("documentPath");
+                throw new ArgumentNullException(paramName: "documentPath");
             }
             XPathDocument xpath = new XPathDocument(documentPath);
             _documentNavigator = xpath.CreateNavigator();
