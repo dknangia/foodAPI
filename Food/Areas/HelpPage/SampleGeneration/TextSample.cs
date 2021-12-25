@@ -11,7 +11,7 @@ namespace Food.Areas.HelpPage
         {
             if (text == null)
             {
-                throw new ArgumentNullException("text");
+                throw new ArgumentNullException(paramName: "text");
             }
             Text = text;
         }
