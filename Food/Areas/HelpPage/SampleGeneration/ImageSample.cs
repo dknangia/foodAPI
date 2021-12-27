@@ -15,7 +15,7 @@ namespace Food.Areas.HelpPage
         {
             if (src == null)
             {
-                throw new ArgumentNullException("src");
+                throw new ArgumentNullException(paramName: "src");
             }
             Src = src;
         }
