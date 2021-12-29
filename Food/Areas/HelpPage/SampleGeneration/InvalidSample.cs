@@ -11,7 +11,7 @@ namespace Food.Areas.HelpPage
         {
             if (errorMessage == null)
             {
-                throw new ArgumentNullException("errorMessage");
+                throw new ArgumentNullException(paramName: "errorMessage");
             }
             ErrorMessage = errorMessage;
         }
