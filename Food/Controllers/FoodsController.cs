@@ -32,7 +32,7 @@ namespace Food.Controllers
                 if (result != null)
                     foreach (var item in result)
                     {
-                        item.URL = (new UrlHelper(Request)).Link("Foods", new {foodId = item.ID});
+                        item.Url = (new UrlHelper(Request)).Link("Foods", new {foodId = item.Id});
                     }
             }
             catch (Exception ex)
@@ -66,7 +66,7 @@ namespace Food.Controllers
             if (toSave != null)
             {
                 FoodModel model = _foodRepository.SaveFood(toSave);
-                model.URL = (new UrlHelper(Request)).Link("Foods", new { foodId = model.ID });
+                model.Url = (new UrlHelper(Request)).Link("Foods", new { foodId = model.Id });
                 return Request.CreateResponse(HttpStatusCode.Created, model);
             }
             else
