@@ -6,8 +6,8 @@ namespace Food.Models
 {
     public class FoodModel
     {
-        public string URL { get; set; }
-        public int ID { get; set; }
+        public string Url { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }        
     }
