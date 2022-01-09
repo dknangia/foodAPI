@@ -7,7 +7,7 @@ namespace Food.Models
 {
     public class MeasureModel
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public string Sugar { get; set; }
     }
 }
