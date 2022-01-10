@@ -7,15 +7,15 @@ namespace Food.Models.Repository
 {
     public class FoodRepository : IFoodRepository
     {
-        private DB _db;
+        private Db _db;
 
         public FoodRepository()
         {
-            _db = new DB();
+            _db = new Db();
         }
         public IList<FoodModel> GetFood()
         {
-            return DB.foodList;
+            return Db.FoodList;
         }
 
         public FoodModel GetFood(int foodId)
@@ -25,16 +25,23 @@ namespace Food.Models.Repository
                 throw new Exception("Passed foodId cannot be less than 0"); 
             }
 
-            return DB.foodList.Find(x => x.ID == foodId);
+            return Db.FoodList.Find(x => x.Id == foodId);
         }
 
         
         public virtual FoodModel SaveFood(FoodModel toSave)
         {
-            int newId = DB.foodList.Count  +1 ;
-            toSave.ID = newId; 
-            DB.foodList.Add(toSave);
-            return DB.foodList.Find(x => x.ID == newId);
+            if (toSave != null)
+            {
+                int newId = Db.FoodList.Count + 1;
+                toSave.Id = newId;
+                Db.FoodList.Add(toSave);
+                return Db.FoodList.Find(x => x.Id == newId);
+            }
+            else
+            {
+                throw new ArgumentNullException(paramName: "SaveFood() : toSave cannot be null");
+            }
 
         }
 
@@ -43,7 +50,7 @@ namespace Food.Models.Repository
             throw new NotImplementedException();
         }
 
-        public int addPositiveUnmbers(int a, int b)
+        public int AddPositiveNumbers(int a, int b)
         {
             try
             {
@@ -59,6 +66,23 @@ namespace Food.Models.Repository
                 throw;
             }
             
+        }
+
+        public string GetOutput(int number)
+        {
+            if ((number % 3 == 0) && (number % 5 == 0))
+                return "FizzBuzz"; 
+            else if (number % 3 == 0)
+            {
+                return "Fizz";
+            }else if (number % 5 ==0 )
+            {
+                return "Buzz"; 
+            }
+            else
+            {
+                return number.ToString();
+            }
         }
     }
 }
