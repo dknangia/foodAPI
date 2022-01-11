@@ -21,7 +21,7 @@ namespace Food.Areas.HelpPage
         public override bool Equals(object obj)
         {
             InvalidSample other = obj as InvalidSample;
-            return other != null && ErrorMessage == other.ErrorMessage;
+            return other != null && ErrorMessage == other.ErrorMessage; 
         }
 
         public override int GetHashCode()
